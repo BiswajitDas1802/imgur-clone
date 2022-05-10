@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style/hompage.css" />
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 </head>
 
-<body>
+<body id="body">
     <nav class="navbar">
-        <div>
+        <div class="right-nav">
             <svg width="94" height="34" viewBox="0 0 94 34" class="icon stroke fill" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <title>Imgur</title>
@@ -49,18 +50,34 @@
                     d="M3.51952 0.756104C1.58599 0.756104 0 2.1078 0 3.75626C0 5.43752 1.54695 6.7561 3.51952 6.7561C5.45305 6.7561 7 5.43752 7 3.75626C7 2.1078 5.45305 0.756104 3.51952 0.756104Z"
                     fill="#005BBB"></path>
             </svg>
-            <button class="nav-btn4"><img
+            <button class="nav-btn4 btn1"><img
                     src="	https://s.imgur.com/desktop-assets/desktop-assets/icon-new-post.13ab64f9f36ad8f25ae3544b350e2ae1.svg" />New
                 Post</button>
         </div>
-        <div>search</div>
-        <div>
+        <div class="mid-nav">
+            <input placeholder="Images, #tags, @users oh my!" type="text">
+            <button class="search-btn"><img
+                    src="https://s.imgur.com/desktop-assets/desktop-assets/icon-search.8d0f9b564a4659d48d8eca38b968a7f2.svg"></button>
+        </div>
+        <div class="right-nav nav-left">
             <button class="nav-btn1">Go Ad-Free</button>
-            <button class="">Sign in</button>
+            <button class="sign-in">Sign in</button>
             <button class="nav-btn4">Sign up</button>
         </div>
     </nav>
-    <div class="top-body"></div>
+    <div class="tbody-outer">
+        <h2>Stay true to you</h2>
+        <div class="top-body" id="top-body">
+        </div>
+    </div>
+    <div id="container">
+        <div class="masonry">
+
+        </div>
+    </div>
 </body>
+<script type="module" src="./homepage.js">
+
+</script>
 
 </html>
