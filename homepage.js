@@ -80,6 +80,7 @@ arr.map((el) => {
   ndiv.style.background = el.color;
   ndiv.innerText = el.title;
   div.append(ndiv);
+
   div.addEventListener("click", () => showFilter(el.title));
   tbody.appendChild(div);
 });
@@ -96,6 +97,8 @@ function showFilter(el) {
     .then(() => waitForImages());
 }
 
+
+
 function getData(page, limit) {
   fetch(
     `https://pixabay.com/api/?key=27303194-6bbe946910e573f4bb4241c7f&q=all&image_type=photo&per_page=${limit}&page=${page}`
@@ -103,7 +106,9 @@ function getData(page, limit) {
     .then((data) => data.json())
     .then((data) => data.hits.map((el) => createGrid(el.largeImageURL)))
     .then((data) => console.log(data))
+
     .then(() => waitForImages());
+
 }
 getData(1, 30);
 
@@ -165,7 +170,9 @@ let page = 1;
 let body = document.getElementById("container");
 body.addEventListener("scroll", () => infiniteScroll());
 function infiniteScroll() {
-  if (body.scrollTop + body.clientHeight + 20 >= body.scrollHeight) {
+
+  if (body.scrollTop + body.clientHeight + 300 >= body.scrollHeight) {
+    console.log(page);
     page++;
     if (page >= 20) {
       page = 1;
@@ -186,4 +193,6 @@ function changeNav() {
     nav[0].style.backgroundColor = "transparent";
   }
 }
-changeNav();
+
+    getData(page, 30);
+
