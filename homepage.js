@@ -80,8 +80,24 @@ arr.map((el) => {
   ndiv.style.background = el.color;
   ndiv.innerText = el.title;
   div.append(ndiv);
+
+  div.addEventListener("click", () => showFilter(el.title));
   tbody.appendChild(div);
 });
+
+function showFilter(el) {
+  let g = document.getElementsByClassName("masonry");
+  g[0].innerHTML = "";
+  fetch(
+    `https://pixabay.com/api/?key=27303194-6bbe946910e573f4bb4241c7f&q=${el}&image_type=photo&per_page=200`
+  )
+    .then((data) => data.json())
+    .then((data) => data.hits.map((el) => createGrid(el.largeImageURL)))
+    .then((data) => console.log(data))
+    .then(() => waitForImages());
+}
+
+
 
 function getData(page, limit) {
   fetch(
@@ -90,8 +106,9 @@ function getData(page, limit) {
     .then((data) => data.json())
     .then((data) => data.hits.map((el) => createGrid(el.largeImageURL)))
     .then((data) => console.log(data))
-    .then(() => waitForImages())
-    .catch((error) => console.log(error));
+
+    .then(() => waitForImages());
+
 }
 getData(1, 30);
 
@@ -153,13 +170,29 @@ let page = 1;
 let body = document.getElementById("container");
 body.addEventListener("scroll", () => infiniteScroll());
 function infiniteScroll() {
-  console.log(body.scrollTop, body.clientHeight, body.scrollHeight);
+
   if (body.scrollTop + body.clientHeight + 300 >= body.scrollHeight) {
     console.log(page);
     page++;
     if (page >= 20) {
       page = 1;
     }
-    getData(page, 30);
+    getData(page, 100);
+    removeEventListener("body", infiniteScroll);
   }
 }
+let nav = document.getElementsByClassName("navbar");
+
+body.addEventListener("scroll", () => changeNav());
+
+function changeNav() {
+  console.log(body.scrollTop);
+  if (body.scrollTop >= 500) {
+    nav[0].style.background = "#171544";
+  } else if (body.scrollTop == 0) {
+    nav[0].style.backgroundColor = "transparent";
+  }
+}
+
+    getData(page, 30);
+
